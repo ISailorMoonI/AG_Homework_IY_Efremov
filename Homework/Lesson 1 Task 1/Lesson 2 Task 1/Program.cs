@@ -6,11 +6,12 @@ namespace Lesson_2_Task_1
 {
     class Program
     {
-        public class Node
+        public class Node : LinkedList
         {
             public int Value { get; set; }
             public Node NextNode { get; set; }
             public Node PrevNode { get; set; }
+
         }
         public class LinkedList : ILinkedList
         {
@@ -20,17 +21,19 @@ namespace Lesson_2_Task_1
 
             public void AddNode(int value)
             {
-                var node = startNode;
+                var newNode = new Node { Value = value};
 
-                while (node.NextNode != null)
+                if (startNode == null)
                 {
-                    node = node.NextNode;
+                    startNode = newNode;
+                    lastNode = newNode;
+                    return;
+                    
                 }
-
-                var newNode = new Node { Value = value };
-                node.NextNode = newNode;
-
-
+                newNode.PrevNode = lastNode;
+                lastNode.NextNode = newNode;
+                lastNode = newNode;
+                count++;
             }
 
             public void AddNodeAfter(Node node, int value)
@@ -39,6 +42,8 @@ namespace Lesson_2_Task_1
                 var nextItem = node.NextNode;
                 node.NextNode = newNode;
                 newNode.NextNode = nextItem;
+                newNode.PrevNode = node;
+                count++;
             }
 
             public Node FindNode(int searchValue)
@@ -60,9 +65,9 @@ namespace Lesson_2_Task_1
 
             public int GetCount()
             {
-                throw new NotImplementedException();
+                return count;
             }
-
+            
             public void RemoveNode(int index)
             {
                 int currentIndex = 0;
@@ -97,6 +102,7 @@ namespace Lesson_2_Task_1
                         currentNode = currentNode.NextNode;
                         currentIndex++;
                     }
+                count--;
 
                 
                 
@@ -122,7 +128,9 @@ namespace Lesson_2_Task_1
                     node.NextNode.PrevNode = node.PrevNode;
                     node.PrevNode.NextNode = node.NextNode;
                 }
+                count--;
             }
+            
         }
 
 
@@ -142,12 +150,22 @@ namespace Lesson_2_Task_1
 
         static void Main(string[] args)
         {
-            var node = new Node { Value = 10 };
             LinkedList List = new LinkedList();
-            List.AddNodeAfter(node, 68);
-            List.AddNode(641);
+            List.AddNode(80);
+            List.AddNode(44);
+            List.AddNode(55);
+            List.AddNode(33);
+            List.FindNode(80);
+            List.AddNodeAfter(List.FindNode(55), 66);
+            List.RemoveNode(3);
+            List.RemoveNode(44);
+            
 
             
+            
+            
+
+
         }
     }
 }
