@@ -1,6 +1,7 @@
 ﻿using System;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
+using System.Collections.Generic;
 
 namespace Lesson_3_Task_1
 {
@@ -10,20 +11,19 @@ namespace Lesson_3_Task_1
         {
             BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
         }
+        
     }
-    
-
+    public struct PointStruct
+    {
+        public float X;
+        public float Y;
+    }
     public struct DoublePointStruct
     {
         public double X;
         public double Y;
     }
-    public struct FloatPointStruct
-    {
-        public float X;
-        public float Y;
-    }
-    public class FloatPointClass
+    public class PointClass
     {
         public float X;
         public float Y;
@@ -31,118 +31,77 @@ namespace Lesson_3_Task_1
     
     public class BechmarkClass
     {
-        public void FloatArray()
+        
+        public double[] Doublearray()
         {
-            float[] floatArray = new float[50];
-            Random rand = new Random(100);
-            for (int i = 0; i < floatArray.Length; i++)
+            double[] doubleArray = new double[10];
             {
-                floatArray[i] = rand.Next();
+                Random rnd = new Random(100);
+                for (int i = 0; i < doubleArray.Length; i++)
+                {
+                    doubleArray[i] = rnd.Next(0, 100);
+                }
+                return doubleArray;
             }
         }
-        public double[] DoubleArray()
+        static DoublePointStruct PointA = new DoublePointStruct() { X = 43.4343, Y = 42.4343 };
+        static DoublePointStruct PointB = new DoublePointStruct() { X = 33.1232, Y = 21.343432 };
+
+        static PointStruct FloatPointA = new PointStruct() { X = 423.4354543f, Y = 142.4343f };
+        static PointStruct FloatPointB = new PointStruct() { X = 332.1232f, Y = 221.34345432f };
+
+        static PointClass ClassPointA = new PointClass() { X = 423.4354543f, Y = 142.4343f };
+        static PointClass ClassPointB = new PointClass() { X = 332.1232f, Y = 221.34345432f };
+
+        public static float PointDistanceFloatStruct(PointStruct pointOne, PointStruct pointTwo)
         {
-            double[] doubleArray = new double[50];
-            Random rand = new Random(100);
-            for(int i = 0; i <doubleArray.Length; i++)
-            {
-                doubleArray[i] = rand.Next();
-            }
-            return doubleArray;
-        }
-        public int SumValueType(int value)
-        {
-            return 9 + value;
-        }
-
-        public int SumRefType(object value)
-        {
-            return 9 + (int)value;
-        }
-
-
-        public void TestSum()
-        {
-            SumValueType(99);
-        }
-
-
-        public void TestSumBoxing()
-        {
-            object x = 99;
-            SumRefType(x);
-        }
-
-        static int GetRandom()
-        {
-            Random rnd = new Random(245);
-
-            int value = rnd.Next();
-
-            return value;
-        }
-
-
-        public static float PointDistanceFloatStruct(FloatPointStruct pointOne, FloatPointStruct pointTwo)
-        {
-            Random rnd = new Random(245);
-            pointOne.X = rnd.Next();
-            pointTwo.X = rnd.Next();
-            pointOne.Y = rnd.Next();
-            pointTwo.Y = rnd.Next();
             float x = pointOne.X - pointTwo.X;
             float y = pointOne.Y - pointTwo.Y;
             return MathF.Sqrt((x * x) + (y * y));
         }
+        [Benchmark]
+        public void TestDistanceFloatStruct()
+        {
+            PointDistanceFloatStruct(FloatPointA, FloatPointB);
 
-
+        }
         public static double PointDistanceDoubleStruct(DoublePointStruct pointOne, DoublePointStruct pointTwo)
         {
             double x = pointOne.X - pointTwo.X;
             double y = pointOne.Y - pointTwo.Y;
             return Math.Sqrt((x * x) + (y * y));
         }
-
-        public void TestDistanceDoubleStruct(DoublePointStruct pointOne, DoublePointStruct pointTwo)
+        [Benchmark]
+        public void TestDistanceDoubleStruct()
         {
-            for (int i = 0; i <= 5; i++)
-            {
-                var pointOneDouble = new DoublePointStruct() { X = DoubleArray(), Y = DoubleArray() };
-                var pointTwoDouble = new DoublePointStruct() { X = DoubleArray(), Y = DoubleArray() };
-                var res = PointDistanceDoubleStruct(pointOneDouble, pointTwoDouble);
-                Console.WriteLine($"{res}");
-            }
+                PointDistanceDoubleStruct(PointA, PointB);
+                
         }
-
-
-        public static float PointDistanceShort(FloatPointStruct pointOne, FloatPointStruct pointTwo)
+        public static float PointDistanceShort(PointStruct pointOne, PointStruct pointTwo)
         {
-            Random rnd = new Random(245);
-            pointOne.X = rnd.Next();
-            pointTwo.X = rnd.Next();
-            pointOne.Y = rnd.Next();
-            pointTwo.Y = rnd.Next();
             float x = pointOne.X - pointTwo.X;
             float y = pointOne.Y - pointTwo.Y;
             return (x * x) + (y * y);
         }
-
         [Benchmark]
-        public static float PointDistanceFloatClass(FloatPointClass pointOne, FloatPointClass pointTwo)
+        public void TestDistanceShort()
         {
-            Random rnd = new Random(245);
-            pointOne.X = rnd.Next();
-            pointTwo.X = rnd.Next();
-            pointOne.Y = rnd.Next();
-            pointTwo.Y = rnd.Next();
+            PointDistanceShort(FloatPointA, FloatPointB);
+
+        }
+
+        public static float PointDistanceFloatClass(PointClass pointOne, PointClass pointTwo)
+        {
             float x = pointOne.X - pointTwo.X;
             float y = pointOne.Y - pointTwo.Y;
             return MathF.Sqrt((x * x) + (y * y));
         }
-        
+        [Benchmark]
+        public void TestDistanceFloatClass()
+        {
+            PointDistanceFloatClass(ClassPointA, ClassPointB);
 
-
+        }
     }
-
 }
 
