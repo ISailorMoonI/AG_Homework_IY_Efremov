@@ -6,7 +6,7 @@ namespace Lesson_2_Task_1
 {
     class Program
     {
-        public class Node
+        public class Node : LinkedList
         {
             public int Value { get; set; }
             public Node NextNode { get; set; }
@@ -17,30 +17,30 @@ namespace Lesson_2_Task_1
             public Node startNode { get; set; }
             public Node lastNode { get; set; }
             public int count = 0;
-
             public void AddNode(int value)
             {
-                var node = startNode;
+                var newNode = new Node { Value = value};
 
-                while (node.NextNode != null)
+                if (startNode == null)
                 {
-                    node = node.NextNode;
+                    startNode = newNode;
+                    lastNode = newNode;
+                    return;
                 }
-
-                var newNode = new Node { Value = value };
-                node.NextNode = newNode;
-
-
+                newNode.PrevNode = lastNode;
+                lastNode.NextNode = newNode;
+                lastNode = newNode;
+                count++;
             }
-
             public void AddNodeAfter(Node node, int value)
             {
                 var newNode = new Node { Value = value };
                 var nextItem = node.NextNode;
                 node.NextNode = newNode;
                 newNode.NextNode = nextItem;
+                newNode.PrevNode = node;
+                count++;
             }
-
             public Node FindNode(int searchValue)
             {
                 var currentNode = startNode;
@@ -52,17 +52,12 @@ namespace Lesson_2_Task_1
 
                     currentNode = currentNode.NextNode;
                 }
-
                 return null; // если ничего не нашли, то null
-
             }
-
-
             public int GetCount()
             {
-                throw new NotImplementedException();
-            }
-
+                return count;
+            }  
             public void RemoveNode(int index)
             {
                 int currentIndex = 0;
@@ -97,14 +92,8 @@ namespace Lesson_2_Task_1
                         currentNode = currentNode.NextNode;
                         currentIndex++;
                     }
-
-                
-                
-
-                
-
+                count--;
             }
-
             public void RemoveNode(Node node)
             {
                 if (node.NextNode == null)
@@ -122,10 +111,10 @@ namespace Lesson_2_Task_1
                     node.NextNode.PrevNode = node.PrevNode;
                     node.PrevNode.NextNode = node.NextNode;
                 }
+                count--;
             }
+            
         }
-
-
         //Начальную и конечную ноду нужно хранить в самой реализации интерфейса
         public interface ILinkedList
         {
@@ -139,15 +128,33 @@ namespace Lesson_2_Task_1
             void RemoveNode(Node node); // удаляет указанный элемент
             Node FindNode(int searchValue); // ищет элемент по его значению
         }
-
         static void Main(string[] args)
         {
-            var node = new Node { Value = 10 };
             LinkedList List = new LinkedList();
-            List.AddNodeAfter(node, 68);
-            List.AddNode(641);
+            List.AddNode(80);
+            List.AddNode(44);
+            List.AddNode(55);
+            List.AddNode(33);
+            List.FindNode(80);
+            List.AddNodeAfter(List.FindNode(55), 66);
+            List.AddNodeAfter(List.FindNode(80), 23);
+            List.AddNodeAfter(List.FindNode(66), 23);
+            List.AddNodeAfter(List.FindNode(23), 11);
+            List.FindNode(23);
+            List.FindNode(11);
+            List.RemoveNode(3);//remove by index
+            List.RemoveNode(2);//remove by index
+            List.RemoveNode(List.FindNode(80)); // remove by value
+            List.RemoveNode(List.FindNode(11)); // remove by value
+            List.RemoveNode(List.FindNode(23)); // remove by value
+            List.GetCount();
 
-            
+
+
+
+
+
+
         }
     }
 }
