@@ -213,6 +213,24 @@ namespace Lesson_5_Task_1
 
         }
 
+        public void TraversePreOrder(TreeNode parent)
+        {
+            if (parent != null)
+            {
+                Console.Write(parent.Value + " ");
+                TraversePreOrder(parent.LeftChild);
+                TraversePreOrder(parent.RightChild);
+            }
+        }
 
+        public void TraverseInOrder(TreeNode parent)
+        {
+            if (parent != null)
+            {
+                TraverseInOrder(parent.LeftChild);
+                Console.Write(parent.Value + " ");
+                TraverseInOrder(parent.RightChild);
+            }
+        }
     }
 }

@@ -8,7 +8,27 @@ namespace Lesson_5_Task_1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var binaryTree = new MyBinaryTree();
+
+            binaryTree.AddItem(50);
+            binaryTree.AddItem(33);
+            binaryTree.AddItem(64);
+            binaryTree.AddItem(11);
+            binaryTree.AddItem(10);
+            binaryTree.AddItem(42);
+            binaryTree.AddItem(52);
+
+            var getRoot = binaryTree.GetRoot();
+
+            binaryTree.PrintTree();
+
+            Console.WriteLine("PreOrder Traversal:");
+            binaryTree.TraversePreOrder(binaryTree.Root);
+            Console.WriteLine();
+
+            Console.WriteLine("InOrder Traversal:");
+            binaryTree.TraverseInOrder(binaryTree.Root);
+            Console.WriteLine();
         }
     }
 }
