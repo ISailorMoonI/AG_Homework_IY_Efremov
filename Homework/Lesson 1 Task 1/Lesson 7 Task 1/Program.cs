@@ -4,8 +4,8 @@ namespace Lesson_7_Task_1
 {
     class Program
     {
-        const int N = 3;
-        const int M = 3;
+        const int N = 6; 
+        const int M = 6;
 
         static void Print2(int n, int m, int[,] a)
         {
@@ -13,7 +13,7 @@ namespace Lesson_7_Task_1
             for (i = 0; i < n; i++)
             {
                 for (j = 0; j < m; j++)
-                    Console.Write(a[i, j]);
+                    Console.Write(String.Format("{0,5}", a[i, j]));
                 Console.Write("\r\n");
             }
         }
