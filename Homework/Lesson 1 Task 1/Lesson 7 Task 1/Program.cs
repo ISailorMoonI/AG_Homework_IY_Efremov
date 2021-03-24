@@ -4,8 +4,8 @@ namespace Lesson_7_Task_1
 {
     class Program
     {
-        const int N = 6; 
-        const int M = 6;
+        const int N = 7; 
+        const int M = 7;
 
         static void Print2(int n, int m, int[,] a)
         {
