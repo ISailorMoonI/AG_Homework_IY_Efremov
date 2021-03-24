@@ -21,5 +21,4 @@ namespace Lesson_4_Task_2
             return node.Value == Value;
         }
 
-    }
 }
