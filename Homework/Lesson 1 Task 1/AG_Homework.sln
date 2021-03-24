@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson 8 Task 1", "Lesson  
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lesson 8 Task 2", "Lesson 8 Task 2\Lesson 8 Task 2.csproj", "{65CB5511-A451-4D97-B7BA-2FE9B27C424D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson 7 Rework", "Lesson 7 Rework\Lesson 7 Rework.csproj", "{698B9734-6746-45DC-A903-50644A581A25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{65CB5511-A451-4D97-B7BA-2FE9B27C424D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65CB5511-A451-4D97-B7BA-2FE9B27C424D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65CB5511-A451-4D97-B7BA-2FE9B27C424D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{698B9734-6746-45DC-A903-50644A581A25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{698B9734-6746-45DC-A903-50644A581A25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{698B9734-6746-45DC-A903-50644A581A25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{698B9734-6746-45DC-A903-50644A581A25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
