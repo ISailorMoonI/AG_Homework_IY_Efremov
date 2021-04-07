@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace Lesson_7_Task_1
-
+namespace Lesson_7_Rework
 {
     class Program
     {
-        const int N = 7; 
+        const int N = 7;
         const int M = 7;
 
         static void Print2(int n, int m, int[,] a)
@@ -38,3 +37,4 @@ namespace Lesson_7_Task_1
         }
     }
 }
+
